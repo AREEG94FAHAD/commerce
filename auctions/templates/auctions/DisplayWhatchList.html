@@ -1,0 +1,14 @@
+{% extends "auctions/layout.html" %}
+{%block body%}
+
+{% for i in whatList %}
+<li> <a href="{% url 'auctionID' i.Auctions.id %}"> {{i.Auctions.title}}</a>: > {{i.Auctions.description}}: > {{i.Auctions.bid}}: > {{i.Auctions.image}}: > {{i.Auctions.category_list.category}}
+    <form action="{% url 'removeAuctionFromWhatchlist' i.id %}">
+        {% csrf_token %}
+        <input type="submit" value="remove">
+    </form>
+
+</li>
+{%endfor%}
+
+{% endblock%}

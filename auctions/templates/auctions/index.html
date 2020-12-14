@@ -1,0 +1,16 @@
+{% extends "auctions/layout.html" %} 
+<h2>Active Listings</h2>
+
+ {%block body%} {% for i in list%}
+<li>
+    <a href="{% url 'auctionID' i.id %}">{{i.title}}</a> {{i.owner}}:  {{i.image}}: {{i.description}}: 
+    
+    <form action=""></form>
+    {{i.bid}}:
+    {{i.category_list.category}}=={{i.id}}
+    
+</li>
+{% empty %}
+<h1>No Items !!</h1>
+{%endfor%} {% endblock %} 
+

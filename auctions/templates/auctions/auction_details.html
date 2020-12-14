@@ -1,0 +1,49 @@
+{% extends "auctions/layout.html" %}
+{%block body%}
+
+<li>{{auction.id}} {{auction.owner}}: {{auction.title}} {{auction.image}}: {{auction.description}}:
+    {{auction.category}}
+    
+{%if auction.active == True %}
+    <form action="{%url 'addToWatchlist' auction.id%}" method="POST">
+        {% csrf_token %}
+         <input type="submit" value="addWhlist">
+    </form>
+</li>
+
+
+{% if cancel %}
+<form action="{% url 'cancelAuction' auction.id %}" >
+    <input type="submit" value="{{cancel}}"  >
+</form>
+{% endif %}
+
+
+<form action="{% url 'Bid' auction.id %}" method="POST">
+    {% csrf_token %}
+    <input type="number" value="{{auction.bid}}" name="newBid">
+    <input type="submit">
+</form>
+{% endif %}
+
+
+<form action="{% url 'new_comment'  %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="id" value={{auction.id}}>
+    <input type="text" name="comment">
+    <input type="submit">
+</form>
+
+
+<h1>comment</h1>
+{% for comment in comments %}
+<li>{{comment.user}} == {{comment.comment}} == {{comment.time}} </li>
+
+
+{%endfor%}
+
+
+
+
+
+{%endblock%}
